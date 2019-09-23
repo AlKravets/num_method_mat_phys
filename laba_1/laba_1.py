@@ -45,10 +45,11 @@ def A_ij (i,j):
 def create_matrix_A_F (n):
     A = np.zeros((n,n))
     F = np.zeros(n)
+    my = create_n_my(n)
     for i in range(n):
         for j in range(n):
-            A[i][j] = A_ij(i,j)
-        F[i] = integrate.quad(left_function,0,1,args=(i))[0]
+            A[i][j] = A_ij(my[i],my[j])
+        F[i] = integrate.quad(left_function,0,1,args=(my[i]))[0]
     return A,F
 
 def result_SLAR(n):
@@ -70,5 +71,8 @@ if __name__ == '__main__':
     #print(result_SLAR(10))
 
     x = np.arange(0.1,1,0.1)
-    print(result_function(x, 5) - result_function(x, 10))
+    print(result_function(x, 3)  - result_function(x, 4))
+
+
+
 
