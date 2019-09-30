@@ -1,14 +1,17 @@
 import numpy as np
 import math
 #from scipy.optimize import fsolve
-#import scipy
+import scipy.misc
 from scipy import optimize
 from scipy import integrate
 
+def w_for_normalise(x,my):
+    return np.cos(my*x)**2
+
 def w(x, my):
-    return np.cos(my*x)
+    return np.cos(my*x)/ np.sqrt(integrate.quad(w_for_normalise,0,1,args=(my))[0])
 def d_w (x,my):
-    return -my*np.sin(my*x)
+    return -my*np.sin(my*x) / np.sqrt(integrate.quad(w_for_normalise,0,1,args=(my))[0])
 
 def p(x):
     return 2- np.sin(math.pi*x)
@@ -48,7 +51,7 @@ def create_matrix_A_F (n):
     my = create_n_my(n)
     for i in range(n):
         for j in range(n):
-            A[i][j] = A_ij(my[i],my[j])
+            A[j][i] = A_ij(my[i],my[j])
         F[i] = integrate.quad(left_function,0,1,args=(my[i]))[0]
     return A,F
 
@@ -66,12 +69,47 @@ def result_function (x, n):
         res += c[i]*w(x,i)
     return res
 
+def create_result_coefficients(n):
+    return result_SLAR(n), create_n_my(n)
+
+def y(x,n,c,my):
+    res = 0
+    for i in range(n):
+        res = res + c[i]*w(x,my[i])
+    return res
+
+def first_dim (x,n,c,my):
+    return p(x)*scipy.misc.derivative(y,x,n=1,args=(n,c,my), dx = 1e-8)
+
+
+def diffyr(x,n,c,my):
+    return -1*scipy.misc.derivative(first_dim,x,n=1,args=(n,c,my), dx = 1e-8)+ a(x)*scipy.misc.derivative(y,x,n=1,args=(n,c,my), dx = 1e-8) + q(x)*y(x,n,c,my) - f(x)
+def first_condition(n,c,my):
+    return h1*y(0,n,c,my) - h2*scipy.misc.derivative(y,0,n=1,args=(n,c,my), dx = 1e-8)
+def second_condition(n,c,my):
+    return H1*y(1,n,c,my) + H2*scipy.misc.derivative(y,1,n=1,args=(n,c,my), dx = 1e-8)
+
+
+def test_y (n):
+    c, my = create_result_coefficients(n)
+    print(c,my)
+    print(create_n_my(n))
+    print("first condition: ", first_condition(n,c,my))
+    print("second condition: ", second_condition(n,c,my))
+
+    mass = np.linspace(0, 1)
+
+    for i in range(mass.size):
+        print(mass[i],'  ',diffyr(mass[i],n,c,my))
+
+
+
+
 
 if __name__ == '__main__':
     #print(result_SLAR(10))
 
-    x = np.arange(0.1,1,0.1)
-    print(result_function(x, 3)  - result_function(x, 4))
+    test_y(5)
 
 
 
