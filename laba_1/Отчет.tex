@@ -1,0 +1,320 @@
+\documentclass[14pt,a4paper]{scrartcl}
+%\usepackage[14pt]{extsizes}
+\usepackage[utf8]{inputenc}
+\usepackage[english,russian,ukrainian]{babel}
+\usepackage{indentfirst}
+\usepackage{misccorr}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{ upgreek }
+\usepackage{ verbatim }
+
+\graphicspath{}
+\DeclareGraphicsExtensions{.jpg}
+
+\begin{document}
+	\begin{titlepage}
+		\begin{center}
+			\small{Міністерство освіти та науки України}\\
+			\small{Київський національний університет імені Тараса Шевченка}\\
+		\end{center}
+			\vspace{15em}
+		\begin{center}
+			\large{Звіт}\\
+			\large{До лабораторної роботи №1}\\
+			\large{«Розв’язок граничної задачі для звичайного}\\
+			\large{диференціального рівняння  другого порядку методом}\\
+			\large{Бубнова-Гальоркіна»}\\
+			
+		\end{center}
+			
+		\vspace{10em}
+		
+
+	
+		\begin{flushright}
+			Студента 4 курсу\\
+			Факультету кібернетики\\
+			Групи ОМ-4\\
+			Кравця Олексія\\
+			
+		\end{flushright}
+		
+		\vspace{\fill}
+
+		
+		\begin{center}
+			\small{Київ, 2019}
+		\end{center}
+	
+	\end{titlepage}
+
+
+	\newpage
+
+	\section{Постановка Задачі}
+	Методом Бубнова-Гальоркіна розв'язати граничну задачу для звичайного диференціального рівняння другого порядку.
+
+	
+	\begin{equation}\label{eq1}
+		\begin{cases}
+			-\frac{d}{dx}(p(x)\frac{du}{dx})+a(x)\frac{du}{dx}+q(x)u=f(x)  \\ 
+			h_1y(0) - h_2y'(0) =0 \\
+			H_1y(1) - H_2y'(1) =0 \\
+			0<x<1\\
+		\end{cases}
+	\end{equation}
+	
+	\begin{gather}
+	p(x)= 2-sin(\pi x)\\
+	a(x)= sin(\pi x)\\
+	q(x)= 5\\
+	f(x) = 2x^2 + sin(2x)\\
+	h_1 = 0, h_2 = 1\\
+	H_1= 1, H_2 = 4
+	\end{gather}
+	Для розв'язку задачі використати систему власних функцій відповідної задачі Штурма-Ліувілля, для $N=5,N=10$. Побудувати графіки отриманих результатів.
+	
+	\section{Теоретичні відомості}
+	Розглянемо систему \ref{eq1}, помножимо диференціальне рівняння на $v(x)$ та проінтегруємо.
+	
+	\begin{equation} \label{eq2}
+		\int_{0}^{1} \left[ -(p u')' + au' + qu\right]v dx = \int_{0}^{1} fv dx
+	\end{equation}
+	Проінтегруємо ліву частину \ref{eq2} за частинами.
+	\begin{equation} \label{eq3}
+		\int_{0}^{1} \left[ pu'v' + au'v + quv\right] dx - pu'v\big|_{0}^{1} = \int_{0}^{1} fv dx
+	\end{equation}
+	
+	\begin{equation} \label{eq4}
+		\int_{0}^{1} \left[ pu'v' + au'v + quv\right] dx - pu'v\big|_{0}^{1} = \int_{0}^{1} fv dx
+	\end{equation}
+	Нехай $h_2 \neq0, H_2 \neq0$
+	\begin{equation} \label{eq5}
+		\int_{0}^{1} \left[ pu'v' + au'v + quv\right] dx + p(1)u(1)v(1)\frac{H_1}{H_2} +p(0)u(0)v(0)\frac{h_1}{h_2} = \int_{0}^{1} fv dx
+	\end{equation}
+	
+	Потрібно вибрати базис.
+	\begin{enumerate}
+		\item $\{ w_{i}(x) \}_{i=\overline{1,\infty}} \subset W_{2}^{1}(0,1)$ 
+		\item $w_{i}(x)$ лінійно незалежні
+		\item $\{ w_{i}(x) \}_{i=\overline{1,\infty}}$ - повна
+		\item Сильна мінімальність
+	\end{enumerate}
+	
+	Запишемо задачу у операторному вигляді. 
+	\begin{equation} \label{eq6}
+		\left(Lu,v\right) = \left(f,v\right)
+	\end{equation}
+	
+	\begin{equation} \label{eq7}
+		u \approx u_N = \sum_{i=1}^{N}(c_{i}w_{i})
+	\end{equation}
+	Отже
+	\begin{equation} \label{eq8}
+	\left(L \sum_{i=1}^{N}(c_i w_i), w_j\right) = \left(f,w_j\right), \forall j= \overline{1,N}
+	\end{equation}
+	
+	\begin{equation} \label{eq9}
+	\sum_{i=1}^{N}c_i\left(Lw_i, w_j\right) = \left(f,w_j\right), \forall j= \overline{1,N}
+	\end{equation}
+	
+	Отримали систему лінійних алгебраїчних рівнянь $Ac=F$, де $A = [a_{ji}]= \left[\left(Lw_i,w_j\right)\right], F_{j}=\left(f,w_j\right), i,j=\overline{1,N}$
+	В якості $w_i$ візьмемо нормовані власні функції задачі Штурма-Ліувілля.
+	
+	\begin{equation}\label{eq10}
+		\begin{cases}
+			y'' +\lambda y=0\\
+			h_1y(0) - h_2y'(0) =0 \\
+			H_1y(1) - H_2y'(1) =0 \\
+			0<x<1\\
+		\end{cases}
+	\end{equation}
+	
+	Тоді при $\lambda>0$ $y(x)=c_1\cos(\sqrt{\lambda}x)+c_2\sin(\sqrt{\lambda}x)$. Для нормування ділимо $y(x)$ на $\sqrt{\int_{0}^{1}y(x)^{2}dx}$, тоді отримаємо ортонормовану систему функцій.
+	
+	\section{Практична частина}
+	Маємо систему.
+	\begin{equation}\label{eq11}
+		\begin{cases}
+			-\frac{d}{dx}(2-\sin(\pi x)\frac{du}{dx})+\sin(\pi x)\frac{du}{dx}+5u=2x^{2} + \sin(2x)  \\ 
+			 -y'(0) =0 \\
+			y(1) - 4y'(1) =0 \\
+			0<x<1\\
+		\end{cases}
+	\end{equation}
+	Для неї вирішуємо задачу Штурма-Ліувілля.
+	
+	\begin{equation}\label{eq12}
+	\begin{cases}
+	y'' + \lambda y =0\\
+	-y'(0) =0 \\
+	y(1) - 4y'(1) =0 \\
+	0<x<1\\
+	\end{cases}
+	\end{equation}
+	Тоді розв'язок \ref{eq12}.
+	
+	\begin{equation}\label{eq13}
+		\begin{cases}
+			y = c_1\cos(\sqrt{\lambda}x) + c_2\sin(\sqrt{\lambda} x)\\
+			c_1\sqrt{\lambda}\sin(\sqrt{\lambda}*0)-c_2\sqrt{\lambda}\cos(\sqrt{\lambda}*0)=0\\
+			c_1\cos\sqrt{\lambda} +c_2 \sin\sqrt{\lambda} - 4c_1\sqrt{\lambda}\sin\sqrt{\lambda}+4c_2\sqrt{\lambda}\cos\sqrt{\lambda}=0 \\
+			\lambda>0\\
+			\end{cases}
+		\end{equation}
+	
+	Маємо.
+	
+	\begin{equation}\label{eq14}
+		\begin{cases}
+			-c_2\sqrt{\lambda} =0 \\
+			c_1\cos\sqrt{\lambda} - c_1\sqrt{\lambda}\sin\sqrt{\lambda} =0\\
+			\lambda >0\\
+		\end{cases}
+	\end{equation}
+	Отже.
+	
+	\begin{equation}\label{eq15}
+		\begin{cases}
+		c_2 =0\\
+		c_1 = const \\
+		\cos\sqrt{\lambda} = 4\sqrt{\lambda}\sin\sqrt{\lambda}\\
+		\lambda >0
+		\end{cases}
+	\end{equation}
+	
+	Зробимо заміну $\mu = \sqrt{\lambda}$, тоді знайдемо власні значення задачі Штурма-Ліувілля. Це будуть розв'язки рівності $\tan\mu = \frac{1}{4\mu}$. Розв'язки будемо шукати на перетині графіків цих двох функцій.
+	
+	\begin{figure}[h]
+		\center{\includegraphics[scale=0.4]{photo/photo_tan.jpg}}
+		\caption{Пошук $\mu$}
+		\label{fig:image}
+	\end{figure}
+	
+	Виведемо $10$ перших знайдених розв'яків. Вони будуть використані для $N=10$, для $N=5$ беремо тілько $5$ перших значень.
+	
+	
+
+	
+	\begin{center}
+		\begin{tabular}{ | c | c | }
+			\hline
+			Номер & $\mu$ \\ \hline
+			0 & 0.4800944369573904 \\
+			1 & 3.219098575278102 \\
+			2 & 6.322704760794114 \\
+			3 & 9.451223396108258 \\
+			4 & 12.586230978439472 \\
+			5 & 15.723861330900382 \\
+			6 & 18.862808739125725 \\
+			7 & 22.002510426000537 \\
+			8 & 25.142684151278477 \\
+			9 & 28.283172830147695 \\
+			\hline
+		\end{tabular}
+	\end{center}
+	
+	Знайдемо коефіцієнти $c_i$ для $N=5$. Виведемо іх у вигляді таблиці.
+	
+	\begin{center}
+		\begin{tabular}{ | c | c | }
+			\hline
+			Номер & $\mu$ \\ \hline
+			0 & 0.22732327267869532 \\
+			1 & -0.04898313696260203 \\
+			2 & 0.0013834687499639166 \\
+			3 & 0.001300261796753781 \\
+			4 & -9.213418347932191e-05 \\
+			\hline
+		\end{tabular}
+	\end{center}
+
+	Знайдемо коефіцієнти $c_i$ для $N=10$. Виведемо іх у вигляді таблиці.
+	
+		\begin{center}
+		\begin{tabular}{ | c | c | }
+			\hline
+			Номер & $\mu$ \\ \hline
+			0 & 0.2273232942707949 \\
+			1 & -0.048983049256815105 \\
+			2 & 0.0013843854161456144 \\
+			3 & 0.0013072697700308989 \\
+			4 & -9.496965903037512e-05 \\
+			5 & -3.1577236920915394e-05 \\
+			6 & 6.5950854646228584e-06 \\
+			7 & 6.098982888175799e-06 \\
+			8 & -4.361425317466653e-08 \\
+			9 & 1.3782836552094404e-06 \\
+			\hline
+		\end{tabular}
+	\end{center}
+
+\newpage	
+	Виведемо графіки $u_5, u_{10}$.
+	
+	\begin{figure}[h]
+		\begin{center}
+			\begin{minipage}[h]{0.2\linewidth}
+				\includegraphics[width=1\linewidth]{photo/plot_u5.jpg}
+				\caption{$u_5$} %% подпись к рисунку
+				\label{ris:after_floodFill} %% метка рисунка для ссылки на него
+			\end{minipage}
+			\hfill 
+			\begin{minipage}[h]{0.2\linewidth}
+				\includegraphics[width=1\linewidth]{photo/plot_u10.jpg}
+				\caption{$u_{10}$}
+				\label{ris:after_dilation}
+			\end{minipage}
+			\hfill
+			\begin{minipage}[h]{0.2\linewidth}
+				\includegraphics[width=1\linewidth]{photo/plot_u5_u10.jpg}
+				\caption{$u_5, u_10$} %% подпись к рисунку
+				\label{ris:after_erode} %% метка рисунка для ссылки на него
+			\end{minipage}
+		\end{center}
+	\end{figure}
+
+Виведемо усі графіки, а саме $u_5, u_10$ та розв'язок, що знайшла програма Maple 2018.
+
+	\begin{figure}[h]
+		\center{\includegraphics[scale=0.8]{photo/all_plots.jpg}}
+		\caption{усі графіки}
+		\label{fig:image}
+	\end{figure}
+
+Подивимося на граничні умови для $u_5, u_10$.
+
+	\begin{gather}
+		-u_5'(0) =-0. \\
+		u_5(1) - 4u_5'(1) =-6.7*10^{-9}\\
+		-u_{10}'(0) =-0. \\
+		u_{10}(1) - 4u_{10}'(1) =-6.9*10^{-9}\\
+	\end{gather}
+
+Подивимося на різницю між $u_5, u_{10}$.
+
+\begin{center}
+	\begin{tabular}{ | c | c | c | c | }
+		\hline
+		$x$ & $u_5(x)$ & $u_{10}(x)$& $u_5(x) -u_{10}(x)$ \\ \hline
+		0 & 0.1713507664 & 0.1713332926 & 0.174738e-4 \\
+		0.1 & 0.1735473749 & 0.1735434184 & $3.9565*10^{-6}$ \\
+		0.2 & 0.1804278860 & 0.1804645575 & 0.366715e-4 \\
+		0.3 & .1924957935 & .1925036369 & $7.8434*10^{-6}$\\
+		0.4 & .2095726745 & .2095143195 & 0.583550e-4 \\
+		0.5 & .2299759548 & .2299618135 & 0.141413e-4 \\
+		0.6 & .2504923902 & .2505522291 & 0.598389e-4 \\
+		0.7 & .2674131306 & .2674252264 & 0.120958e-4 \\
+		0.8 & .2780112201 & .2779665577 & 0.446624e-4  \\
+		0.9 & .2813304910 & .2813289100 & $1.5810*10^{-6}$ \\
+		1.0 & .2776886120 & .2777192195 & 0.306075e-4 \\
+		\hline
+	\end{tabular}
+\end{center}
+
+\section{Висновок}
+Ми побудували методом Бубнова-Гальоркіна розв'язок для $N=5, N=10$. При $N=5$ розв'язок шукається швидше, але точність меньше. При $N=10$ розв'язок точніший, але рахується довше.
+
+	
+\end{document}
