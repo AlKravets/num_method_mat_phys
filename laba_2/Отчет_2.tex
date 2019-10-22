@@ -1,0 +1,140 @@
+\documentclass[14pt,a4paper]{scrartcl}
+%\usepackage[14pt]{extsizes}
+\usepackage[utf8]{inputenc}
+\usepackage[english,russian,ukrainian]{babel}
+\usepackage{indentfirst}
+\usepackage{misccorr}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{ upgreek }
+\usepackage{ verbatim }
+
+\graphicspath{}
+\DeclareGraphicsExtensions{.jpg}
+
+\begin{document}
+	\begin{titlepage}
+		\begin{center}
+			\small{Міністерство освіти та науки України}\\
+			\small{Київський національний університет імені Тараса Шевченка}\\
+		\end{center}
+			\vspace{15em}
+		\begin{center}
+			\large{Звіт}\\
+			\large{До лабораторної роботи №1}\\
+			\large{«Розв’язок граничної задачі для звичайного}\\
+			\large{диференціального рівняння  другого порядку методом}\\
+			\large{Скінченних елементів на базі методу}\\
+			\large{Бубнова-Гальоркіна»}\\			
+		\end{center}
+			
+		\vspace{10em}
+		
+
+	
+		\begin{flushright}
+			Студента 4 курсу\\
+			Факультету кібернетики\\
+			Групи ОМ-4\\
+			Кравця Олексія\\
+			
+		\end{flushright}
+		
+		\vspace{\fill}
+
+		
+		\begin{center}
+			\small{Київ, 2019}
+		\end{center}
+	
+	\end{titlepage}
+
+
+	\newpage
+
+	\section{Постановка Задачі}
+	Методом Скінченних елементів розв'язати граничну задачу для звичайного диференціального рівняння другого порядку, та порівняти результат з вже отриманим результатом роботи методу Бубнова-Гальоркіна.
+
+	
+	\begin{equation}\label{eq1}
+		\begin{cases}
+			-\frac{d}{dx}(p(x)\frac{du}{dx})+a(x)\frac{du}{dx}+q(x)u=f(x)  \\ 
+			h_1y(0) - h_2y'(0) =0 \\
+			H_1y(1) - H_2y'(1) =0 \\
+			0<x<1\\
+		\end{cases}
+	\end{equation}
+	
+	\begin{gather}
+	p(x)= 2-sin(\pi x)\\
+	a(x)= sin(\pi x)\\
+	q(x)= 5\\
+	f(x) = 2x^2 + sin(2x)\\
+	h_1 = 0, h_2 = 1\\
+	H_1= 1, H_2 = 4
+	\end{gather}
+	Розв'язати задачу при $N=50, 100$ та порівняти результати з попередньою лабораторною роботою.
+	
+	\section{Теоретичні відомості}
+	Ідея методу схожа з методом Бубнова-Гальоркіна і відрізняється лише базисом. Розв'язок буде мати вигляд:
+	
+	\begin{equation} \label{eq2}
+		u \approx u_N = \sum_{i=0}^{N}c_{i}\phi_{i}
+	\end{equation}
+	Де $\phi_i$ - базисні функції. Побудуємо їх.
+	
+	Розділимо відрізок $[0,1]$ на $N$ частин. Отримаємо послідовність $\left\{ x_{i}\right\}_{i=0}^{N}$. Де
+	
+	\begin{gather} \label{eq3}
+			x_{i} = ih, i= \overline{0,N} \\
+			h = \frac{1}{N}
+	\end{gather}
+	Тепер побудуємо функції $\phi_i$
+	
+	\begin{gather} \label{eq4}
+		\phi_{i} = \left\{
+			\begin{array}
+			[c]{ll}%
+				\frac{x-x_{i-1}}{h}, x \in [x_{i-1}, x] \\
+				\frac{x_{i+1}-x}{h}, x \in [x_{i}, x_{i+1}]\\			
+				0, x \notin [x_{i-1}, x_{i+1}]
+			\end{array} 
+		\\
+		\phi_{0} = \left\{
+			\begin{array}
+			[c]{ll}%
+				0, x \geq x_1 \\
+				\frac{x_{i}-x}{h}, 0 \leq x < x_1
+			\end{array}
+	\end{gather}
+	
+	Треба задовольнити головним умовам, в нашому випадку це умови першого типу. Відповідно покладемо $c_0 ,c_N =0$, якщо це необхідно.
+	
+	Помітимо
+	
+	\begin{equation} \label{eq5}
+	\int_{0}^{1} p(x)\phi_{i}'(x)\phi_{j}'(x) \ne 0 
+	\end{equation}
+	
+	лише коли $ \left\{
+	\begin{array}{ll}
+	i = j+1 \\
+	i = j
+	\end{array}
+$
+	
+	Тому можемо рахувати інтеграли такого вигляду.
+	
+	\begin{equation} \label{eq6}
+	\int_{x_{i-1}}^{x_{i+1}} p(x)\phi_{i}'(x)\phi_{i \pm 1}'(x)
+	\end{equation}
+	
+	Також можна помітити, що отримана в результаті матриця буде тридіагональною. 
+
+
+	
+	
+
+
+	
+\end{document}

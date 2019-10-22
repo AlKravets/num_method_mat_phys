@@ -4,6 +4,7 @@ import math
 import scipy.misc
 from scipy import optimize
 from scipy import integrate
+import matplotlib.pyplot as plt
 
 def w_for_normalise(x,my):
     return np.cos(my*x)**2
@@ -93,34 +94,42 @@ def second_condition(n,c,my):
 def test_y (n):
     c, my = create_result_coefficients(n)
     print(c,my)
-    print(create_n_my(n))
-    print("first condition: ", first_condition(n,c,my))
-    print("second condition: ", second_condition(n,c,my))
+    # print(create_n_my(n))
+    # print("first condition: ", first_condition(n,c,my))
+    # print("second condition: ", second_condition(n,c,my))
 
-    mass = np.linspace(0, 1)
+    # mass = np.linspace(0, 1)
 
-    for i in range(mass.size):
-        print(mass[i],'  ',diffyr(mass[i],n,c,my))
+    # for i in range(mass.size):
+    #     print(mass[i],'  ',diffyr(mass[i],n,c,my))
 
+    xx = np.linspace(0,1,100)
+    yy = np.zeros(100)
+    for i in range(100):
+        yy[i] = y(xx[i],n,c,my)
+    fig,ax = plt.subplots()
+    
+    ax.plot(xx,yy)
+    plt.show()
 
-
+def create_data_for_plot( N: int, x: np.ndarray):
+    c, my = create_result_coefficients(N)
+    yy = np.zeros(x.shape[0])
+    for i in range(x.shape[0]):
+        yy[i] = y(x[i],N,c,my)
+    return yy
 
 
 if __name__ == '__main__':
     #print(result_SLAR(10))
-
+    xx = np.linspace(0,1,100)
+    yy = create_data_for_plot(10,xx)
     
-    cas = result_SLAR(10)
-    print(cas)
-    for i in range(10):
-        print(i, '&', cas[i], '\\\\')
-
-    test_y(10)
-    c = create_n_my(10)
-
-    for i in range(10):
-        print(i, '&', c[i], '\\\\')
-
+    fig,ax = plt.subplots()
+    #plt.axis('scaled')
+    
+    ax.plot(xx,yy)
+    plt.show()
 
 
 
