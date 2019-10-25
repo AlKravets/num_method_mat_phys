@@ -68,11 +68,13 @@ def left_function(x,j,N):
     return f(x)*phi(x,j, N, 1/N)
 
 def A_ij (i,j,N):
-    res = integrate.quad(right_function,max((i-1)/N,0),min(1,(i+1)/N),args=(i,j, N))[0] + p(1)*phi(1,i, N, 1/N)*phi(1,j, N,1/N)*H1/H2 + p(0)*phi(0,i, N, 1/N)*phi(0,j, N, 1/N)*h1/h2
-    print(integrate.quad(right_function,0,min((i-1)/N,1),args=(i,j, N))[0],'  ', i, j)
+    res = integrate.quad(right_function,max((i-1)/N,0),min(1,(i+1)/N),args=(i,j, N),limit = 200)[0] + p(1)*phi(1,i, N, 1/N)*phi(1,j, N,1/N)*H1/H2\
+         + p(0)*phi(0,i, N, 1/N)*phi(0,j, N, 1/N)*h1/h2
+    print(integrate.quad(right_function,max((i-1)/N,0),min(1,(i+1)/N),args=(i,j, N), limit = 100)[0],'  ', i, j)
+    #print(p(1)*phi(1,i, N, 1/N)*phi(1,j, N,1/N)*H1/H2 + p(0)*phi(0,i, N, 1/N)*phi(0,j, N, 1/N)*h1/h2,'  ', i, j)
     return res
 
-#(i-1)/N,(i+1)/N
+#max((i-1)/N,0),min(1,(i+1)/N)
 
 def create_matrix_A_F (N):
     A = np.zeros((N+1,N+1))
@@ -82,8 +84,10 @@ def create_matrix_A_F (N):
         for j in range(1,-2,-1):
             if 0<=i-j <=N:
                 A[i-j][i] = A_ij(i,i-j,N)
+        # for j in range(N+1):
+        #     A[j][i] = A_ij(i,j,N)
 
-        F[i] = integrate.quad(left_function,0,1,args=(i,N))[0]
+        F[i] = integrate.quad(left_function,max((i-1)/N,0),min(1,(i+1)/N),args=(i,N))[0]
     return A,F
 
 def result_SLAR(n):
@@ -113,14 +117,14 @@ def create_data_for_plot( N: int, x: np.ndarray):
     print(y(0,N,c))
     for i in range(x.shape[0]):
         yy[i] = y(x[i],N,c)
-        #yy[i] = phi(x[i],1,N,1/N)
+        #yy[i] = phi(x[i],N,N,1/N)
     return yy
 
 if __name__ == '__main__':
     #print(result_SLAR(10))
     #print(right_function(0.1,2,0,10))
     xx = np.linspace(0,1,100)
-    yy = create_data_for_plot(30,xx)
+    yy = create_data_for_plot(100,xx)
     
     fig,ax = plt.subplots()
     #plt.axis('scaled')
