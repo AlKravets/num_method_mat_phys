@@ -120,16 +120,29 @@ def create_data_for_plot( N: int, x: np.ndarray):
         #yy[i] = phi(x[i],N,N,1/N)
     return yy
 
+
+def test_2_plots(N1, N2):
+    xx = np.linspace(0,1,50)
+    y1 = create_data_for_plot(N1,xx)
+    y2 = create_data_for_plot(N2,xx)
+
+    fig,ax = plt.subplots()
+    ax.scatter(xx,y1, marker = 'X')
+    ax.plot(xx,y2, color = 'red')
+    #plt.legend("n1="+str(N1), "n2="+str(N2))
+    plt.show()
+
 if __name__ == '__main__':
     #print(result_SLAR(10))
     #print(right_function(0.1,2,0,10))
-    xx = np.linspace(0,1,100)
-    yy = create_data_for_plot(100,xx)
+    # xx = np.linspace(0,1,100)
+    # yy = create_data_for_plot(100,xx)
     
-    fig,ax = plt.subplots()
-    #plt.axis('scaled')
+    # fig,ax = plt.subplots()
+    # #plt.axis('scaled')
     
-    ax.plot(xx,yy)
-    plt.show()
+    # ax.plot(xx,yy)
+    # plt.show()
 
+    test_2_plots(50,100)
 
