@@ -58,6 +58,7 @@ H1, H2 = 1, 4
 
 def a(x):
     return np.sin(math.pi*x)
+    # return 0
 
 def f(x):
     return 2*x**2 + np.sin(2*x)
@@ -142,13 +143,16 @@ def test_2_plots(N1, N2):
 
 
 def p_1 (x):
-    return np.exp(x + (4 * np.arctan((1-2*np.arctan(math.pi*x/2))/3**0.5))/(3**0.5 * math.pi))
+    return -1*np.exp(x + (4 * np.arctan((1-2*np.tan(math.pi*x/2))/3**0.5))/(3**0.5 * math.pi)\
+        +np.log(2-np.sin(math.pi *x)))
+    #return p(x)
     
 def p_1_for_integrate(x):
     return 1/p_1(x)
 
 def q_1(x):
-    return q(x)/p(x)*p_1(x)
+    return q(x)/(np.sin(math.pi *x)-2)*-p_1(x)
+    # return q(x)
 
 
 def _p_ (x_1,x_2,h):
@@ -190,7 +194,7 @@ def create_SLAR_for_2_metod(x:np.ndarray):
 
     ##
     A[0][1] = -_p_(0,h,h )/h
-    A[0][0] = _p_(0,h,h )/h +alfa_1*h/2 + h/2*_q_0_N(0,0.5*h,h)
+    A[0][0] = _p_(0,h,h )/h +alfa_1 + h/2*_q_0_N(0,0.5*h,h)
     F[0] = h/2*_f_0_N(0,0.5*h,h)
 
 
