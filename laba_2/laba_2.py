@@ -7,6 +7,7 @@ from scipy import integrate
 import matplotlib.pyplot as plt
 
 
+# система линейно независимых функций
 def phi(x,i, N, h):
     if 0<i<N :
         if h*(i-1) <=x<=h*i :
@@ -26,7 +27,7 @@ def phi(x,i, N, h):
         else:
             return 0
 
-
+# производные функций системы
 def d_phi(x,i, N, h):
     if 0<i<N :
         if h*(i-1) <=x<=h*i :
@@ -46,7 +47,7 @@ def d_phi(x,i, N, h):
         else:
             return 0
 
-
+# данные задачи
 def p(x):
     return 2- np.sin(math.pi*x)
 
@@ -61,19 +62,20 @@ def a(x):
 def f(x):
     return 2*x**2 + np.sin(2*x)
 
-
+# часть функции слева под интегралом
 def right_function(x, i,j,N):
     return p(x)*d_phi(x,i,N, 1/N)*d_phi(x,j,N,1/N) + a(x)*d_phi(x,i, N, 1/N)*phi(x,j, N, 1/N) + q(x)*phi(x,i,N, 1/N)*phi(x,j, N, 1/N)
+# подинтегральная функция справа
 def left_function(x,j,N):
     return f(x)*phi(x,j, N, 1/N)
-
+# эл матрицы
 def A_ij (i,j,N):
-    res = integrate.quad(right_function,max((i-1)/N,0),min(1,(i+1)/N),args=(i,j, N))[0] + p(1)*phi(1,i, N, 1/N)*phi(1,j, N,1/N)*H1/H2 + p(0)*phi(0,i, N, 1/N)*phi(0,j, N, 1/N)*h1/h2
-    print(integrate.quad(right_function,0,min((i-1)/N,1),args=(i,j, N))[0],'  ', i, j)
+    res = integrate.quad(right_function,max((i-1)/N,0),min(1,(i+1)/N),args=(i,j, N),limlst=50)[0] + p(1)*phi(1,i, N, 1/N)*phi(1,j, N,1/N)*H1/H2 + p(0)*phi(0,i, N, 1/N)*phi(0,j, N, 1/N)*h1/h2
+    print(integrate.quad(right_function,max((i-1)/N,0),min(1,(i+1)/N),args=(i,j, N))[0],'  ', i, j)
     return res
 
 #(i-1)/N,(i+1)/N
-
+# создание слар
 def create_matrix_A_F (N):
     A = np.zeros((N+1,N+1))
     F = np.zeros(N+1)
@@ -85,6 +87,7 @@ def create_matrix_A_F (N):
 
         F[i] = integrate.quad(left_function,0,1,args=(i,N))[0]
     return A,F
+
 
 def result_SLAR(n):
     A, F = create_matrix_A_F(n)
@@ -120,7 +123,7 @@ if __name__ == '__main__':
     #print(result_SLAR(10))
     #print(right_function(0.1,2,0,10))
     xx = np.linspace(0,1,100)
-    yy = create_data_for_plot(30,xx)
+    yy = create_data_for_plot(50,xx)
     
     fig,ax = plt.subplots()
     #plt.axis('scaled')

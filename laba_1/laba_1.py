@@ -110,16 +110,16 @@ if __name__ == '__main__':
     #print(result_SLAR(10))
 
     
-    cas = result_SLAR(10)
-    print(cas)
-    for i in range(10):
-        print(i, '&', cas[i], '\\\\')
+    # cas = result_SLAR(10)
+    # print(cas)
+    # for i in range(10):
+    #     print(i, '&', cas[i], '\\\\')
 
-    test_y(10)
-    c = create_n_my(10)
+    test_y(5)
+    # c = create_n_my(10)
 
-    for i in range(10):
-        print(i, '&', c[i], '\\\\')
+    # for i in range(10):
+    #     print(i, '&', c[i], '\\\\')
 
 
 
