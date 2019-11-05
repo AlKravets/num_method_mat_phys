@@ -49,10 +49,7 @@ def d_phi(x,i, N, h):
 
 
 def p(x):
-    if x< 1/(math.pi):        
-        return 2- np.sin(math.pi*x)
-    else:
-        return np.cos(math.pi*x)
+    return 2- np.sin(math.pi*x)
 
 def q(x):
     return 5
