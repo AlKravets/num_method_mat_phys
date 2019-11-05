@@ -24,8 +24,8 @@
 			\large{До лабораторної роботи №1}\\
 			\large{«Розв’язок граничної задачі для звичайного}\\
 			\large{диференціального рівняння  другого порядку методом}\\
-			\large{Скінченних елементів на базі методу}\\
-			\large{Бубнова-Гальоркіна»}\\			
+			\large{Скінченних елементів на базі методу Бубнова-Гальоркіна}\\
+			\large{та інтегро-інтерполяційним методом»}\\			
 		\end{center}
 			
 		\vspace{10em}
@@ -53,7 +53,7 @@
 	\newpage
 
 	\section{Постановка Задачі}
-	Методом Скінченних елементів розв'язати граничну задачу для звичайного диференціального рівняння другого порядку, та порівняти результат з вже отриманим результатом роботи методу Бубнова-Гальоркіна.
+	Методом Скінченних елементів і Інтегро-інтерполяційним методом розв'язати граничну задачу для звичайного диференціального рівняння другого порядку, та порівняти результат з вже отриманим результатом роботи методу Бубнова-Гальоркіна.
 
 	
 	\begin{equation}\label{eq1}
@@ -73,41 +73,80 @@
 	h_1 = 0, h_2 = 1\\
 	H_1= 1, H_2 = 4
 	\end{gather}
-	Розв'язати задачу при $N=50, 100$ та порівняти результати з попередньою лабораторною роботою.
+	Розв'язати задачу при $N=50, 100$ двома методами та порівняти результати з попередньою лабораторною роботою.
 	
 	\section{Теоретичні відомості}
-	Ідея методу схожа з методом Бубнова-Гальоркіна і відрізняється лише базисом. Розв'язок буде мати вигляд:
+	\subsection{Метод Скінченних різниць}
+	Розглянемо систему \ref{eq1}, помножимо диференціальне рівняння на $v(x)$ та проінтегруємо.
 	
 	\begin{equation} \label{eq2}
-		u \approx u_N = \sum_{i=0}^{N}c_{i}\phi_{i}
+	\int_{0}^{1} \left[ -(p u')' + au' + qu\right]v dx = \int_{0}^{1} fv dx
 	\end{equation}
-	Де $\phi_i$ - базисні функції. Побудуємо їх.
+	Проінтегруємо ліву частину \ref{eq2} за частинами.
+	\begin{equation} \label{eq3}
+	\int_{0}^{1} \left[ pu'v' + au'v + quv\right] dx - pu'v\big|_{0}^{1} = \int_{0}^{1} fv dx
+	\end{equation}
+	
+	\begin{equation} \label{eq4}
+	\int_{0}^{1} \left[ pu'v' + au'v + quv\right] dx - pu'v\big|_{0}^{1} = \int_{0}^{1} fv dx
+	\end{equation}
+	Нехай $h_2 \neq0, H_2 \neq0$
+	\begin{equation} \label{eq5}
+	\int_{0}^{1} \left[ pu'v' + au'v + quv\right] dx + p(1)u(1)v(1)\frac{H_1}{H_2} +p(0)u(0)v(0)\frac{h_1}{h_2} = \int_{0}^{1} fv dx
+	\end{equation}
+	
+	Виберемо $\phi_i$ -базисні функції. Побудуємо їх.
 	
 	Розділимо відрізок $[0,1]$ на $N$ частин. Отримаємо послідовність $\left\{ x_{i}\right\}_{i=0}^{N}$. Де
 	
 	\begin{gather} \label{eq3}
-			x_{i} = ih, i= \overline{0,N} \\
-			h = \frac{1}{N}
+	x_{i} = ih, i= \overline{0,N} \\
+	h = \frac{1}{N}
 	\end{gather}
 	Тепер побудуємо функції $\phi_i$
 	
 	\begin{gather} \label{eq4}
-		\phi_{i} = \left\{
-			\begin{array}
-			[c]{ll}%
-				\frac{x-x_{i-1}}{h}, x \in [x_{i-1}, x] \\
-				\frac{x_{i+1}-x}{h}, x \in [x_{i}, x_{i+1}]\\			
-				0, x \notin [x_{i-1}, x_{i+1}]
-			\end{array} 
-		\\
-		\phi_{0} = \left\{
-			\begin{array}
-			[c]{ll}%
-				0, x \geq x_1 \\
-				\frac{x_{i}-x}{h}, 0 \leq x < x_1
-			\end{array}
+	\phi_{i} = \left\{
+	\begin{array}
+	[c]{ll}%
+	\frac{x-x_{i-1}}{h}, x \in [x_{i-1}, x] \\
+	\frac{x_{i+1}-x}{h}, x \in [x_{i}, x_{i+1}]\\			
+	0, x \notin [x_{i-1}, x_{i+1}]
+	\end{array} 
+	\\
+	\phi_{0} = \left\{
+	\begin{array}
+	[c]{ll}%
+	0, x \geq x_1 \\
+	\frac{x_{i}-x}{h}, 0 \leq x < x_1
+	\end{array}
 	\end{gather}
 	
+	 Розв'язок  задачі \ref{eq1} буде мати вигляд:
+	
+	\begin{equation} \label{eq2}
+	u \approx u_N = \sum_{i=0}^{N}c_{i}\phi_{i}
+	\end{equation}
+	
+	
+	Запишемо задачу у операторному вигляді. 
+	\begin{equation} \label{eq6}
+	\left(Lu,v\right) = \left(f,v\right)
+	\end{equation}
+	
+	\begin{equation} \label{eq7}
+	u \approx u_N = \sum_{i=1}^{N}(c_{i}\phi_{i})
+	\end{equation}
+	Отже
+	\begin{equation} \label{eq8}
+	\left(L \sum_{i=1}^{N}(c_i \phi_i), \phi_j\right) = \left(f,\phi_j\right), \forall j= \overline{1,N}
+	\end{equation}
+	
+	\begin{equation} \label{eq9}
+	\sum_{i=1}^{N}c_i\left(L\phi_i, \phi_j\right) = \left(f,\phi_j\right), \forall j= \overline{1,N}
+	\end{equation}
+	
+	Отримали систему лінійних алгебраїчних рівнянь $Ac=F$, де $A = [a_{ji}]= \left[\left(L\phi_i,\phi_j\right)\right], F_{j}=\left(f,\phi_j\right), i,j=\overline{1,N}$
 	Треба задовольнити головним умовам, в нашому випадку це умови першого типу. Відповідно покладемо $c_0 ,c_N =0$, якщо це необхідно.
 	
 	Помітимо
@@ -120,8 +159,8 @@
 	\begin{array}{ll}
 	i = j+1 \\
 	i = j
-	\end{array}
-$
+	\end{array}\right.
+	$
 	
 	Тому можемо рахувати інтеграли такого вигляду.
 	
@@ -130,10 +169,35 @@ $
 	\end{equation}
 	
 	Також можна помітити, що отримана в результаті матриця буде тридіагональною. 
-
-
 	
+	\subsection{Інтегро-інтерполяційний метод}
 	
+	Розподілимо $[0,1]$ на $N$ частин з рівномірним кроком $h= \frac{1}{N}$, де $x_{0} = 0$, $x_{N} = 1$.
+	
+	Для використання методу перетворимо систему \ref{eq1} у таку форму:
+	
+	\begin{equation}\label{eq10}
+	\left\{
+	\begin{array}{ll}
+		-(ku')' +qu = f, 0<x<1 \\
+		-ku' + \alpha_{1}u = \mu_{1}, x =0\\
+		ku' + \alpha_{2}u = \mu_{2}, x =1
+	\end{array}\right.
+	\end{equation}
+	
+	Для цього скористаємося формулами:
+	
+	\begin{equation}\label{eq11}
+		k(x) = -e^{\int \frac{a(x)}{p(x)} dx}
+	\end{equation}
+
+	\begin{equation}\label{eq12}
+		q(x) = \frac{q(x)}{p(x)} e^{\int \frac{a(x)}{p(x)} dx}
+	\end{equation}	
+	
+	\begin{equation}\label{eq13}
+		\alpha_{1} = p(0)\frac{h1}{h2}, h2 \ne 0
+	\end{equation}
 
 
 	
