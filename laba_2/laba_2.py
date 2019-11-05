@@ -6,10 +6,7 @@ from scipy import optimize
 from scipy import integrate
 import matplotlib.pyplot as plt
 
-<<<<<<< HEAD
 import laba_1
-=======
->>>>>>> from git
 
 def phi(x,i, N, h):
     if 0<i<N :
@@ -60,11 +57,8 @@ h1, h2 = 0, 1
 H1, H2 = 1, 4
 
 def a(x):
-    return np.sin(math.pi*x)
-<<<<<<< HEAD
-    # return 0
-=======
->>>>>>> from git
+    # return np.sin(math.pi*x)
+    return 0
 
 def f(x):
     return 2*x**2 + np.sin(2*x)
@@ -130,16 +124,11 @@ def create_data_for_plot( N: int, x: np.ndarray):
 
 
 def test_2_plots(N1, N2):
-<<<<<<< HEAD
     xx = np.linspace(0,1,100)
-=======
-    xx = np.linspace(0,1,50)
->>>>>>> from git
     y1 = create_data_for_plot(N1,xx)
     y2 = create_data_for_plot(N2,xx)
 
     fig,ax = plt.subplots()
-<<<<<<< HEAD
     ax.scatter(xx,y1, marker = 'X', s = 5)
     ax.plot(xx,y2, color = 'red')
     #ax.plot(xx,y1, color = 'blue')
@@ -154,16 +143,16 @@ def test_2_plots(N1, N2):
 
 
 def p_1 (x):
-    return -1*np.exp(x + (4 * np.arctan((1-2*np.tan(math.pi*x/2))/3**0.5))/(3**0.5 * math.pi)\
-        +np.log(2-np.sin(math.pi *x)))
-    #return p(x)
+    # return -1*np.exp(x + (4 * np.arctan((1-2*np.tan(math.pi*x/2))/3**0.5))/(3**0.5 * math.pi)\
+    #     +np.log(2-np.sin(math.pi *x)))
+    return p(x)
     
 def p_1_for_integrate(x):
     return 1/p_1(x)
 
 def q_1(x):
-    return q(x)/(np.sin(math.pi *x)-2)*-p_1(x)
-    # return q(x)
+    # return q(x)/(np.sin(math.pi *x)-2)*-p_1(x)
+     return q(x)
 
 
 def _p_ (x_1,x_2,h):
@@ -231,13 +220,6 @@ def test_metod_2(x):
 
 
 
-=======
-    ax.scatter(xx,y1, marker = 'X')
-    ax.plot(xx,y2, color = 'red')
-    #plt.legend("n1="+str(N1), "n2="+str(N2))
-    plt.show()
-
->>>>>>> from git
 if __name__ == '__main__':
     #print(result_SLAR(10))
     #print(right_function(0.1,2,0,10))
@@ -250,7 +232,6 @@ if __name__ == '__main__':
     # ax.plot(xx,yy)
     # plt.show()
 
-<<<<<<< HEAD
     #test_2_plots(50,100)
 
     x = np.linspace(0,1,50)
@@ -258,6 +239,3 @@ if __name__ == '__main__':
     print(p_1(0.3))
 
 
-=======
-    test_2_plots(50,100)
->>>>>>> from git
