@@ -48,7 +48,10 @@ def d_phi(x,i, N, h):
 
 
 def p(x):
-    return 2- np.sin(math.pi*x)
+    if x< 1/(math.pi):        
+        return 2- np.sin(math.pi*x)
+    else:
+        return np.cos(math.pi*x)
 
 def q(x):
     return 5
@@ -122,13 +125,14 @@ def create_data_for_plot( N: int, x: np.ndarray):
 
 
 def test_2_plots(N1, N2):
-    xx = np.linspace(0,1,50)
+    xx = np.linspace(0,1,100)
     y1 = create_data_for_plot(N1,xx)
     y2 = create_data_for_plot(N2,xx)
 
     fig,ax = plt.subplots()
-    ax.scatter(xx,y1, marker = 'X')
+    ax.scatter(xx,y1, marker = 'X', s = 5)
     ax.plot(xx,y2, color = 'red')
+    #ax.plot(xx,y1, color = 'blue')
     #plt.legend("n1="+str(N1), "n2="+str(N2))
     plt.show()
 
@@ -145,3 +149,5 @@ if __name__ == '__main__':
     # plt.show()
 
     test_2_plots(50,100)
+
+
