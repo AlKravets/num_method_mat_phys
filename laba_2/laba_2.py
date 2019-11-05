@@ -6,6 +6,7 @@ from scipy import optimize
 from scipy import integrate
 import matplotlib.pyplot as plt
 
+import laba_1
 
 def phi(x,i, N, h):
     if 0<i<N :
@@ -136,6 +137,88 @@ def test_2_plots(N1, N2):
     #plt.legend("n1="+str(N1), "n2="+str(N2))
     plt.show()
 
+
+
+
+# Метод 2
+
+
+
+def p_1 (x):
+    return np.exp(x + (4 * np.arctan((1-2*np.arctan(math.pi*x/2))/3**0.5))/(3**0.5 * math.pi))
+    
+def p_1_for_integrate(x):
+    return 1/p_1(x)
+
+def q_1(x):
+    return q(x)/p(x)*p_1(x)
+
+
+def _p_ (x_1,x_2,h):
+    return (integrate.quad(p_1_for_integrate,x_1,x_2)[0]/h)**-1
+
+def _q_ (x_1,x_2,h):
+    return integrate.quad(q_1,x_1,x_2)[0]/h
+
+def _f_ (x_1,x_2,h):
+    return integrate.quad(f,x_1,x_2)[0]/h
+
+def _p_0_N (x_1,x_2,h):
+    return 2*_p_ (x_1,x_2,h)
+
+def _q_0_N (x_1,x_2,h):
+    return 2*_q_ (x_1,x_2,h) 
+
+
+def _f_0_N (x_1,x_2,h):
+    return 2*_f_ (x_1,x_2,h)
+
+alfa_1 = p_1(0)*h1/h2
+alfa_2 = p_1(1)*H1/H2
+
+def create_SLAR_for_2_metod(x:np.ndarray):
+    N = x.shape[0]-1
+    h = 1/N
+    u =np.zeros(N+1)
+    F =np.zeros(N+1)
+    A = np.zeros((N+1,N+1))
+
+
+    for i in range(1, N):
+        A[i][i-1] = -1* _p_(h*(i-1), h*(i), h)/h**2 # p_i
+        A[i][i] = (_p_(h*(i), h*(i+1), h)+_p_(h*(i-1), h*(i), h))/h**2 +_q_(h*(i-0.5),h*(i+0.5),h)  # p_1+1 + p_i
+        A[i][i+1] = -1*_p_(h*(i), h*(i+1), h)/h**2 #p_i+1
+        F[i] = _f_(h*(i-0.5),h*(i+0.5),h)
+
+
+    ##
+    A[0][1] = -_p_(0,h,h )/h
+    A[0][0] = _p_(0,h,h )/h +alfa_1*h/2 + h/2*_q_0_N(0,0.5*h,h)
+    F[0] = h/2*_f_0_N(0,0.5*h,h)
+
+
+    ##
+    A[N][N-1] =  -_p_(h*(N-1), h*N, h)/h
+    A[N][N] = _p_(h*(N-1), h*N, h)/h + alfa_2 + h/2*_q_0_N(h*(N-0.5), h*N, h)
+    F[N] = h/2*_f_0_N(h*(N-0.5), h*N, h)
+
+    u = np.linalg.solve(A,F)
+    return u
+
+def test_metod_2(x):
+    u = create_SLAR_for_2_metod(x)
+    #u = p_1(x)
+    print(u)
+
+    y1 = create_data_for_plot(x.shape[0],x)
+    fig,ax = plt.subplots()
+    ax.scatter(x,u, color = 'red')
+    ax.plot(x,y1, color = 'blue')
+    plt.legend('m_2', 'm_1')
+    plt.show()
+
+
+
 if __name__ == '__main__':
     #print(result_SLAR(10))
     #print(right_function(0.1,2,0,10))
@@ -148,6 +231,10 @@ if __name__ == '__main__':
     # ax.plot(xx,yy)
     # plt.show()
 
-    test_2_plots(50,100)
+    #test_2_plots(50,100)
+
+    x = np.linspace(0,1,50)
+    test_metod_2(x)
+    print(p_1(0.3))
 
 

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2019.6.8)  20 OCT 2019 23:24
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2019.6.8)  5 NOV 2019 23:41
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -506,13 +506,13 @@ LaTeX Font Info:    Try loading font information for T2A+cmr on input line 4.
 File: t2acmr.fd 2001/08/11 v1.0a Computer Modern Cyrillic font definitions
 )
 
-LaTeX Warning: Label `eq2' multiply defined.
-
-
 LaTeX Warning: Label `eq3' multiply defined.
 
 
 LaTeX Warning: Label `eq4' multiply defined.
+
+
+LaTeX Warning: Label `eq2' multiply defined.
 
 
 LaTeX Warning: Label `eq5' multiply defined.
@@ -608,8 +608,12 @@ LaTeX Font Info:    Try loading font information for T2A+cmss on input line 55.
 (c:/texlive/2019/texmf-dist/tex/latex/cyrillic/t2acmss.fd
 File: t2acmss.fd 2001/08/11 v1.0a Computer Modern Cyrillic font definitions
 )
-LaTeX Font Info:    Try loading font information for U+msa on input line 59.
+Overfull \hbox (6.32767pt too wide) in paragraph at lines 56--57
+[]\T2A/cmr/m/n/14.4 Методом Скiн-чен-них еле-мен-тiв i Iнтегро-iнтерполяцiйним 
+ме-то-дом розв'язати
+ []
 
+LaTeX Font Info:    Try loading font information for U+msa on input line 59.
 (c:/texlive/2019/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
@@ -617,11 +621,11 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 59.
 
 (c:/texlive/2019/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)
+) [2]
 ! Extra }, or forgotten \right.
 <template> }
             $}\ifdim \wdz@ >\totwidth@ \global \totwidth@ \wdz@ \fi \endtemp...
-l.109 	\end{gather}
+l.123 	\end{gather}
                    
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -632,7 +636,7 @@ deleted material, e.g., by typing `I$}'.
 ! Missing \right. inserted.
 <inserted text> 
                 \right .
-l.109 	\end{gather}
+l.123 	\end{gather}
                    
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -643,7 +647,7 @@ my insertion and my current dilemma will both disappear.
 ! Missing } inserted.
 <inserted text> 
                 }
-l.109 	\end{gather}
+l.123 	\end{gather}
                    
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -654,7 +658,7 @@ my insertion and my current dilemma will both disappear.
 ! Extra }, or forgotten \right.
 <template> }
             $}\ifdim \wdz@ >\totwidth@ \global \totwidth@ \wdz@ \fi \endtemp...
-l.109 	\end{gather}
+l.123 	\end{gather}
                    
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -665,7 +669,7 @@ deleted material, e.g., by typing `I$}'.
 ! Missing \right. inserted.
 <inserted text> 
                 \right .
-l.109 	\end{gather}
+l.123 	\end{gather}
                    
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -676,7 +680,7 @@ my insertion and my current dilemma will both disappear.
 ! Missing } inserted.
 <inserted text> 
                 }
-l.109 	\end{gather}
+l.123 	\end{gather}
                    
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -687,7 +691,7 @@ my insertion and my current dilemma will both disappear.
 ! Extra }, or forgotten \right.
 <template> }
             $}\calc@shift@gather \set@gather@field \endtemplate 
-l.109 	\end{gather}
+l.123 	\end{gather}
                    
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -698,7 +702,7 @@ deleted material, e.g., by typing `I$}'.
 ! Missing \right. inserted.
 <inserted text> 
                 \right .
-l.109 	\end{gather}
+l.123 	\end{gather}
                    
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -709,7 +713,7 @@ my insertion and my current dilemma will both disappear.
 ! Missing } inserted.
 <inserted text> 
                 }
-l.109 	\end{gather}
+l.123 	\end{gather}
                    
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -720,7 +724,7 @@ my insertion and my current dilemma will both disappear.
 ! Extra }, or forgotten \right.
 <template> }
             $}\calc@shift@gather \set@gather@field \endtemplate 
-l.109 	\end{gather}
+l.123 	\end{gather}
                    
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -731,7 +735,7 @@ deleted material, e.g., by typing `I$}'.
 ! Missing \right. inserted.
 <inserted text> 
                 \right .
-l.109 	\end{gather}
+l.123 	\end{gather}
                    
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -742,7 +746,7 @@ my insertion and my current dilemma will both disappear.
 ! Missing } inserted.
 <inserted text> 
                 }
-l.109 	\end{gather}
+l.123 	\end{gather}
                    
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -750,29 +754,17 @@ With luck, this will get me unwedged. But if you
 really didn't forget anything, try typing `2' now; then
 my insertion and my current dilemma will both disappear.
 
-[2]
-! Missing \right. inserted.
-<inserted text> 
-                \right .
-l.124 $
-       
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-[3] (./Отчет_2.aux)
+[3] [4] (./Отчет_2.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 5905 strings out of 492609
- 92369 string characters out of 6132819
- 273605 words of memory out of 5000000
- 9726 multiletter control sequences out of 15000+600000
- 11974 words of font info for 34 fonts, out of 8000000 for 9000
+ 5910 strings out of 492609
+ 92414 string characters out of 6132819
+ 272605 words of memory out of 5000000
+ 9730 multiletter control sequences out of 15000+600000
+ 12790 words of font info for 35 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  51i,20n,51p,9113b,354s stack positions out of 5000i,500n,10000p,200000b,80000s
 {c:/texlive/2019/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t2a.enc}<c:/tex
@@ -787,11 +779,12 @@ exlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><c:/texlive/201
 9/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb><c:/texlive/2019/texmf-di
 st/fonts/type1/public/cm-super/sfrm1440.pfb><c:/texlive/2019/texmf-dist/fonts/t
 ype1/public/cm-super/sfrm1728.pfb><c:/texlive/2019/texmf-dist/fonts/type1/publi
-c/cm-super/sfsx2074.pfb>
-Output written on Отчет_2.pdf (3 pages, 146083 bytes).
+c/cm-super/sfsx1728.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/cm-super
+/sfsx2074.pfb>
+Output written on Отчет_2.pdf (4 pages, 168296 bytes).
 PDF statistics:
- 67 PDF objects out of 1000 (max. 8388607)
- 48 compressed objects within 1 object stream
+ 74 PDF objects out of 1000 (max. 8388607)
+ 53 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
