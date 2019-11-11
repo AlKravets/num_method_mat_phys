@@ -72,7 +72,9 @@ def mu(x):
     return np.exp(x + (4 * np.arctan((1-2*np.tan(math.pi*x/2))/3**0.5))/(3**0.5 * math.pi))
 
 def p_1 (x):
-    return -1*(np.sin(math.pi*x)-2)*mu(x)
+    if x< 0.5:
+        return -1*(np.sin(math.pi*x)-2)*mu(x)
+    else: return -1*(np.sin(math.pi*x)-2)*mu(x)+1
     # return p(x)
     
 def p_1_for_integrate(x):
@@ -230,15 +232,15 @@ def create_SLAR_for_2_metod(x:np.ndarray):
 def test_metod_2(x):
     u = create_SLAR_for_2_metod(x)
 
-    y1 = laba_1.create_data_for_plot(10,x)
+    #y1 = laba_1.create_data_for_plot(10,x)
 
-    #y1 = create_data_for_plot(x.shape[0],x)
+    y1 = create_data_for_plot(x.shape[0],x)
     fig,ax = plt.subplots()
     ax.scatter(x,u, color = 'red', label = 'Интегро-интер. метод')
-    ax.plot(x,y1, color = 'blue', label = 'Метод Галёркина')
+    ax.plot(x,y1, color = 'blue', label = 'Метод конечных разниц')
     plt.legend()
     plt.show()
-    fig.savefig('photo2_1.jpg')
+    #fig.savefig('photo2_1.jpg')
 
 def delta_3_metods(x):
     y_0 = laba_1.create_data_for_plot(10, x)
@@ -290,9 +292,9 @@ if __name__ == '__main__':
     #test_2_plots(50,100)
 
     x = np.linspace(0,1,101)
-    #test_metod_2(x)
+    test_metod_2(x)
     #print(p_1(0.3))
-    delta_3_metods(x)
+    #delta_3_metods(x)
 
     #test_2_plots_2_metods()
 
