@@ -69,13 +69,14 @@ def f(x):
 def mu(x):
     # return np.exp(x + (4 * np.arctan((1-2*np.tan(math.pi*x/2))/3**0.5))/(3**0.5 * math.pi)\
     #     +np.log(2-np.sin(math.pi *x)))
-    return np.exp(x + (4 * np.arctan((1-2*np.tan(math.pi*x/2))/3**0.5))/(3**0.5 * math.pi))
+    return (np.exp(x + (4 * np.arctan((1-2*np.tan(math.pi*x/2))/3**0.5))/(3**0.5 * math.pi)))**-1
 
 def p_1 (x):
-    if x< 0.5:
-        return -1*(np.sin(math.pi*x)-2)*mu(x)
-    else: return -1*(np.sin(math.pi*x)-2)*mu(x)+1
-    # return p(x)
+    return -1*(np.sin(math.pi*x)-2)*mu(x)
+    # if x< 0.5:
+    #     return -1*(np.sin(math.pi*x)-2)*mu(x)
+    # else: return -1*(np.sin(math.pi*x)-2)*mu(x)+1
+    
     
 def p_1_for_integrate(x):
     return 1/p_1(x)
