@@ -69,7 +69,7 @@ def f(x):
 def mu(x):
     # return np.exp(x + (4 * np.arctan((1-2*np.tan(math.pi*x/2))/3**0.5))/(3**0.5 * math.pi)\
     #     +np.log(2-np.sin(math.pi *x)))
-    return (np.exp(x + (4 * np.arctan((1-2*np.tan(math.pi*x/2))/3**0.5))/(3**0.5 * math.pi)))**-1
+    return np.exp(x + (4 * np.arctan((1-2*np.tan(math.pi*x/2))/3**0.5))/(3**0.5 * math.pi))
 
 def p_1 (x):
     return -1*(np.sin(math.pi*x)-2)*mu(x)
