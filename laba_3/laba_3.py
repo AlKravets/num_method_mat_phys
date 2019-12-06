@@ -15,7 +15,7 @@ c = 380
 ro =8900
 
 def print_time(t, tay):
-    return t*tay*R**2/(lam/c/ro)**2
+    return t*tay*R**2/(lam/c/ro)
 
 def show_res(h, y):
     x = np.arange(0,1+h,h)
@@ -50,6 +50,11 @@ def show_all_res(h, tay, y_res, t_end):
 
 def x_i_plus_1_2 (i, h):
     return integrate.quad(lambda x : x**2, i*h , (i+1)*h)[0] / h
+    # return ((i-0.5)*h)**2
+
+def x_i (i,h):
+    # return integrate.quad(lambda x : x**2, i*h , (i+1)*h)[0] / h
+    return h*i
 
 
 def create_matrix (h, tay):
@@ -57,18 +62,18 @@ def create_matrix (h, tay):
     A = np.zeros((N+1,N+1))
     for i in range(1, N):
         A[i][i-1] = -0.5/h**2 * (x_i_plus_1_2(i-1, h))**2
-        A[i][i] = (i*h)**2/tay + 0.5/h**2 *((x_i_plus_1_2(i-1, h))**2 + (x_i_plus_1_2(i, h))**2)
+        A[i][i] = x_i(i,h)**2/tay + 0.5/h**2 *((x_i_plus_1_2(i-1, h))**2 + (x_i_plus_1_2(i, h))**2)
         A[i][i+1] = -0.5/h**2 * (x_i_plus_1_2(i, h))**2
     
     A[N,N] = 1
 
-    # A[0,0] = h/tay + 1/h
-    # A[0,1] = -1/h
+    # A[0,0] = h/tay/2 + 1/h
+    # A[0,1] = h/tay/2 -1/h
 
-    A[0][0] = 1/tay
+    # A[0][0] = 1/tay
 
-    # A[0,0] = 1/tay + 1/h
-    # A[0,1] = -1/h
+    A[0,0] = 1/tay + 0.5/h
+    A[0,1] = -0.5/h
 
     return A
 
@@ -85,15 +90,15 @@ def result (h, tay):
 
         for i in range(1, N):
             F[i] = y_j[i-1]*(0.5/h**2 * (x_i_plus_1_2(i-1, h))**2) \
-                + y_j[i]*((i*h)**2/tay - 0.5/h**2 *((x_i_plus_1_2(i-1, h))**2 + (x_i_plus_1_2(i, h))**2))\
+                + y_j[i]*(x_i(i,h)**2/tay - 0.5/h**2 *((x_i_plus_1_2(i-1, h))**2 + (x_i_plus_1_2(i, h))**2))\
                     + y_j[i+1]*(0.5/h**2 * (x_i_plus_1_2(i, h))**2)
         
         F[N] = -1
-        # F[0] = y_j[0]*(h/tay - 1/h) + y_j[1]*(1/h)
-        F[0] = 1/h*(y_j[1] - y_j[0]) + y_j[0]/tay
+        # F[0] = y_j[0]*(h/tay/2 - 1/h) + y_j[1]*(h/2/tay + 1/h)
+        # F[0] = 1/h*(y_j[1] - y_j[0]) + y_j[0]/tay
 
 
-        #F[0] = y_j[0]*(1/tay - 1/h) + y_j[1]*(1/h)
+        F[0] = y_j[0]*(1/tay - 0.5/h) + y_j[1]*(0.5/h)
 
         y_j = np.linalg.solve(A,F)
 
