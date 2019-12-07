@@ -4,7 +4,10 @@ import matplotlib.pyplot as plt
 from scipy import integrate
 
 
-R = 0.05
+# R = 0.05
+# чит метод 
+R = 0.1
+#
 u_kp = 50
 
 def return_to_norm(x,y):
@@ -72,8 +75,12 @@ def create_matrix (h, tay):
 
     # A[0][0] = 1/tay
 
-    A[0,0] = 1/tay + 0.5/h
-    A[0,1] = -0.5/h
+    # A[0,0] = 1/tay + 0.5/h
+    # A[0,1] = -0.5/h
+
+    # Чит метод
+    A[0,0]  = 1
+    #
 
     return A
 
@@ -86,7 +93,10 @@ def result (h, tay):
     y_res = [y_j.tolist(),]
 
     t = 0
-    while t<10000 and y_j[0]> -4/5:
+
+
+
+    while t<10000 and y_j[int(0.5/h)]> -4/5:
 
         for i in range(1, N):
             F[i] = y_j[i-1]*(0.5/h**2 * (x_i_plus_1_2(i-1, h))**2) \
@@ -98,7 +108,11 @@ def result (h, tay):
         # F[0] = 1/h*(y_j[1] - y_j[0]) + y_j[0]/tay
 
 
-        F[0] = y_j[0]*(1/tay - 0.5/h) + y_j[1]*(0.5/h)
+        # F[0] = y_j[0]*(1/tay - 0.5/h) + y_j[1]*(0.5/h)
+
+        # Чит метод
+        F[0] = -1
+        # 
 
         y_j = np.linalg.solve(A,F)
 
